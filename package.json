@@ -1,12 +1,13 @@
 {
   "name": "named.css",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "minifying css files by renaming...",
   "main": "dist/index.js",
   "bin": {
     "named-css": "dist/bin.js"
   },
   "scripts": {
+    "prepare": "node ./scripts/prepare.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [

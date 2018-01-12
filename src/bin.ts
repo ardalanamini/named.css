@@ -16,6 +16,7 @@ program
 
     return path.join(process.cwd(), output)
   }, path.join(process.cwd(), 'build'))
+  .option('-p, --prefix <prefix>', 'prefix for classes and ids', '')
   .parse(process.argv)
 
 if (!fs.existsSync(program.output)) fs.mkdirSync(program.output)
@@ -29,7 +30,7 @@ program.args.map((inputPath) => {
   input += '\n\n' + fs.readFileSync(filePath, 'utf8')
 })
 
-let result = build(input)
+let result = build(input, program.prefix)
 
 let output = result.output
 

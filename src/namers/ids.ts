@@ -1,38 +1,12 @@
 import { generateString } from '../utils'
 
-const attributes = (input: string) => {
-  let output = input
-  let attributes: Array<{ [key: string]: any }> = []
-  let last: string
-
-  output = output.replace(/\[id(\^|\~|\||\*|\$)=[\"'](-?[_a-zA-Z]+[_a-zA-Z0-9-]*)[\"']\]/g, (match, operator, origin) => {
-    console.log(match, operator, origin)
-    // switch (operator) {
-    //   case '*':
-    //   default:
-    //     attributes.push({
-    //       regex: new RegExp(origin),
-    //       name: last
-    //     })
-    // }
-
-    return match
-  })
-
-  return {
-    output,
-    attributes
-  }
+export interface Named {
+  [key: string]: string
 }
 
-export default (input: string, prefix: string = '') => {
+export default (input: string, prefix: string = '', ids: Named = {}) => {
   let output = input
-  let ids: OBJ = {}
   let last: string
-
-  let temp = attributes(output)
-  let attrs = temp.attributes
-  output = temp.output
 
   output = output.replace(/#-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g, (match) => {
     let origin = match.substr(1)
@@ -42,9 +16,9 @@ export default (input: string, prefix: string = '') => {
 
     last = generateString(last)
 
-    ids[origin] = last
+    ids[origin] = `${prefix}${last}`
 
-    return `#${last}`
+    return `#${prefix}${last}`
   })
 
   return {

@@ -1,8 +1,12 @@
 import { generateString } from '../utils'
 
+export interface Named {
+  [key: string]: string
+}
+
 export default (input: string) => {
   let output = input
-  let keyframes: OBJ = {}
+  let keyframes: Named = {}
   let last: string
 
   output = output.replace(/keyframes [_a-zA-Z]+[_a-zA-Z0-9-]*(?=[^}]*\{)/g, (match) => {

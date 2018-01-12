@@ -1,6 +1,11 @@
 # named.css
 minifying css files by renaming...
 
+[![npm](https://img.shields.io/npm/v/named.css.svg)](https://www.npmjs.com/package/named.css)
+[![npm](https://img.shields.io/npm/dm/named.css.svg)](https://www.npmjs.com/package/named.css)
+[![GitHub stars](https://img.shields.io/github/stars/ardalanamini/named.css.svg)](https://github.com/ardalanamini/named.css/stargazers)
+[![license](https://img.shields.io/github/license/ardalanamini/named.css.svg)](https://github.com/ardalanamini/named.css/blob/master/LICENSE)
+
 [TOC]
 
 ## Impressions

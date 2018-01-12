@@ -1,4 +1,4 @@
-const dictionary = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`
+const DICTIONARY = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export const generateString = (last?: string | null) => {
   if (!last) return 'a'
@@ -11,11 +11,11 @@ export const generateString = (last?: string | null) => {
     if (last.length > 1) {
       if (last.length > 2) fresh += last.substr(0, last.length - 2)
 
-      fresh += dictionary[(dictionary.indexOf(last[last.length - 2]) + 1) % dictionary.length]
+      fresh += DICTIONARY[(DICTIONARY.indexOf(last[last.length - 2]) + 1) % DICTIONARY.length]
     }
 
     return fresh + '0'
   }
 
-  return last.substr(0, last.length - 1) + dictionary[dictionary.indexOf(last[last.length - 1]) + 1]
+  return last.substr(0, last.length - 1) + DICTIONARY[DICTIONARY.indexOf(last[last.length - 1]) + 1]
 }

@@ -17,22 +17,25 @@ const attributes = (input: string, prefix: string) => {
 
     switch (operator) {
       case '$':
-        regex = new RegExp(`(${origin})$`)
-        break;
+        attributes[key] = {
+          regex: new RegExp(`(${origin})$`),
+          name: `-${last}-`
+        }
+        return match.replace(origin, `-${last}-`)
       case '^':
-        regex = new RegExp(`^(${origin})`)
-        break;
+        attributes[key] = {
+          regex: new RegExp(`^(${origin})`),
+          name: `${prefix}-${last}-`
+        }
+        return match.replace(origin, `${prefix}-${last}-`)
       case '*':
       default:
-        regex = new RegExp(`(${origin})`, 'g')
+        attributes[key] = {
+          regex: new RegExp(`(${origin})`, 'g'),
+          name: `${prefix}-${last}-`
+        }
+        return match.replace(origin, `${prefix}-${last}-`)
     }
-
-    attributes[key] = {
-      regex,
-      name: `-${last}-`
-    }
-
-    return match.replace(origin, `-${last}-`)
   })
 
   return {
@@ -41,9 +44,12 @@ const attributes = (input: string, prefix: string) => {
   }
 }
 
-export default (input: string, prefix: string = '') => {
+export interface Named {
+  [key: string]: string
+}
+
+export default (input: string, prefix: string = '', classes: Named = {}) => {
   let output = input
-  let classes: OBJ = {}
   let last: string
 
   let temp = attributes(output, prefix)
@@ -67,8 +73,8 @@ export default (input: string, prefix: string = '') => {
 
       switch (operator) {
         case '$':
-          classes[origin] = `${last}${attr.name}`
-          return `.${last}${attr.name}`
+          classes[origin] = `${prefix}${last}${attr.name}`
+          return `.${prefix}${last}${attr.name}`
         case '^':
           // classes[origin] = `${attr.name}${last}`
           // return `.${attr.name}${last}`
@@ -79,9 +85,9 @@ export default (input: string, prefix: string = '') => {
       }
     }
 
-    classes[origin] = last
+    classes[origin] = `${prefix}${last}`
 
-    return `.${last}`
+    return `.${prefix}${last}`
   })
 
   return {
