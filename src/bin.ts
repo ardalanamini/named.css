@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as program from 'commander'
 import * as path from 'path'
 import * as fs from 'fs'
@@ -7,11 +9,11 @@ import build from './index'
 let startTime = new Date().getTime()
 
 program
-  .name(name)
+  .name('named-css')
   .version(version)
   .description(description)
   .usage('<inputs> [options]')
-  .option('-o, --output <output>', 'output path', (output) => {
+  .option('-o, --output <output>', 'output path', (output: string) => {
     if (path.isAbsolute(output)) return output
 
     return path.join(process.cwd(), output)

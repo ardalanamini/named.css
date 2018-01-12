@@ -1,6 +1,6 @@
 {
   "name": "named.css",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "minifying css files by renaming...",
   "main": "dist/index.js",
   "bin": {
