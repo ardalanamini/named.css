@@ -29,14 +29,14 @@ program.args.map((inputPath) => {
 
   if (!path.isAbsolute(inputPath)) filePath = path.join(process.cwd(), inputPath)
 
-  input += '\n\n' + fs.readFileSync(filePath, 'utf8')
+  input += fs.readFileSync(filePath, 'utf8') + '\n\n'
 })
 
 let result = build(input, program.prefix)
 
 let output = result.output
 
-output = '/**\n * Built with perfect-css\n */\n\n' + output
+output = '/**\n * Built with pnamed.css\n */\n\n' + output
 
 fs.writeFileSync(path.join(program.output, 'build.css'), output, 'utf8');
 fs.writeFileSync(path.join(program.output, 'classes.json'), JSON.stringify(result.classes), 'utf8');
